@@ -1,0 +1,25 @@
+# $Id$
+# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Contributor: Max Liebkies <mail@maxliebkies.de>, Instalab <instalab@github.com>
+
+pkgname=dotnet-sdk
+pkgver=2.1.300.preview2
+pkgrel=1
+pkgdesc='The .NET Core SDK'
+arch=('any')
+url='https://www.microsoft.com/net/core'
+license=('MIT')
+depends=('dotnet-runtime')
+options=('staticlibs')
+conflicts=('dotnet-sdk-2.0')
+provides=('dotnet-sdk-2.0')
+source=('https://download.microsoft.com/download/3/7/C/37C0D2E3-2056-4F9A-A67C-14DEFBD70F06/dotnet-sdk-2.1.300-preview2-008533-linux-x64.tar.gz')
+sha256sums=('d15cab4944de9b42ebf1ce22d82e57e0e1e6c017b913fb3d80f77fda804a704e')
+
+package() {
+  install -dm 755 "${pkgdir}"/{opt/dotnet,usr/share/licenses}
+  cp -dr --no-preserve='ownership' sdk "${pkgdir}"/opt/dotnet/
+  ln -s dotnet-runtime "${pkgdir}"/usr/share/licenses/dotnet-sdk
+}
+
+# vim: ts=2 sw=2 et:
